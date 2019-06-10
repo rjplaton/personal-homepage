@@ -135,4 +135,7 @@ h2.about-me {
 .label-warning {
     background-color: red;
 }
+.label-150 {
+    font-size: 100%;
+}
 
