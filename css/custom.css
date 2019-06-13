@@ -6,7 +6,9 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 /* End of Google Fonts*/
-
+.col-sm-3 > label-150 {
+    font-size: 150%;
+}
 /*Colorful Gradient*/
 .colorful {
   background:
@@ -21,7 +23,9 @@ body {
     linear-gradient(245deg, hsla(293.21, 100%, 80.12%, 1) 100%, hsla(293.21, 100%, 80.12%, 0) 70%);
   }
 /*End of Colorful Gradient*/
-
+.label-150 {
+    font-size: 100%;
+}
 .footer-social-info {
 	text-align: center;
 }
@@ -135,7 +139,6 @@ h2.about-me {
 .label-warning {
     background-color: red;
 }
-.label-150 {
-    font-size: 100%;
-}
+
+
 
