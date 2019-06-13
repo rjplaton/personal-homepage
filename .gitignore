@@ -1,7 +1,7 @@
 
 *.sublime-project
 gh-personal-homepage.sublime-workspace
-img/.DS_Store
-img/.DS_Store
-img/.DS_Store
-img/.DS_Store
+*/.DS_Store
+.DS_Store
+*/*/.DS_Store
+
