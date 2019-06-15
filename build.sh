@@ -3,5 +3,3 @@ cat templates/top.html content/index.html templates/bottom.html > docs/index.htm
 cat templates/top.html content/projects.html templates/bottom.html > docs/projects.html
 cat templates/top.html content/blog.html templates/bottom.html > docs/blog.html
 cat templates/top.html content/contact.html templates/bottom.html > docs/contact.html
-echo "Currently building another index so that the root resolves properly"
-cat templates/top.html content/index.html templates/bottom.html > ./index.html
