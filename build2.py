@@ -46,3 +46,28 @@ contact_page = template.safe_substitute(
     meta_description="Contact me through the contact form on this page"
 )
 open('./docs/contact.html', 'w+').write(contact_page)
+
+
+
+#have a list of content pages
+    #pages list - values are key value pairs for:
+        #filename: location
+        #output: location
+        #page_title: title
+        #meta_description: description
+        #class (for setting active navigation links)
+#def function for reading and replacing strings for content pages
+    #print the page to test accessing data from list
+    #what is content
+    #return results
+#def function for combining results with template
+    #combine content results with template to form full page
+    #write the combination full html to /docs/
+    #return to end
+
+#def main function for all pages in the content list
+    #results
+    #combine
+    
+
+#invoke main function
