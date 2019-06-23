@@ -29,6 +29,24 @@ pages = [ {
 },
 ]
 
+#list every blog post
+blog_posts = [ {
+        "filename": "content/blog/1.html",
+        "date": "03 June 2019",
+        "title": "Officially a student at Kickstart Coding",
+},
+{
+        "filename": "content/blog/2.html",
+        "date": "13 June 2019",
+        "title": "Lorem ipsum",
+},
+{
+        "filename": "content/blog/3.html",
+        "date": "23 June 2019",
+        "title": "Lorem ipsum dolor sit amet",
+},
+]
+
 def replace_template_strings(page):
     """replace strings in template"""
     #using Template strings and safesubstitute to replace values
