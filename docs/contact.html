@@ -13,12 +13,12 @@
 </script>
 
   <meta charset="UTF-8">
-  <meta name="description" content="Welcome to Reuben's personal project site">
+  <meta name="description" content="Contact me through the contact form on this page">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>Reuben J. Platon | Personal Projects & More</title>
+  <title>Contact Me | Reuben J. Platon</title>
 
   <!-- Favicon -->
   <link rel="icon" href="./img/core-img/favicon.ico">
@@ -67,16 +67,10 @@
             <!-- Nav Start -->
             <div class="classynav">
               <ul id="nav">
-                <li class="current-item"><a href="./index.html">Home</a></li>
-                <li><a href="./projects.html">Projects</a>
-                  <!-- Add a drop down for project links in the nav  -->
-                </li>
-
-                <li><a href="./blog.html">Blog</a>
-              
-
-                </li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li ${index_class}><a href="./index.html">Home</a></li>
+                <li ${projects_class}><a href="./projects.html">Projects</a></li>
+                <li ${blog_class}><a href="./blog.html">Blog</a></li>
+                <li class="current-item"><a href="./contact.html">Contact</a></li>
               </ul>
             </div>
             <!-- Nav End -->
@@ -132,7 +126,9 @@
 
     </div>
   </section>
-  <!-- ***** Contact Area End ***** --><!-- ***** Footer Area Start ***** -->
+  <!-- ***** Contact Area End ***** -->
+
+<!-- ***** Footer Area Start ***** -->
   <footer class="footer-area section-padding-80-0">
     <div class="container">
       <div class="row justify-content-between">
