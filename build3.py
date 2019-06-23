@@ -1,8 +1,3 @@
-from string import Template
-
-template_text = open('./templates/template.html').read()
-template = Template(template_text)
-
 #list of every page and the strings to replace
 pages = [ {
         "filename": "content/index.html",
@@ -34,17 +29,31 @@ pages = [ {
 },
 ]
 
-#function to replace template values
-def replace_template_values():
+def replace_template_strings(page):
+    """replace strings in template"""
+    #using Template strings and safesubstitute to replace values
+    #moved the import into this function as it is only used by this function
+    from string import Template
+    template_text = open('./templates/template.html').read()
+    template = Template(template_text)
+    print('Updating:', page['filename'])
+    updated_page = template.safe_substitute(page)
+    #writing the updates to the/doc/pages
+    open(page['output'], 'w+').write(updated_page)
+
+def replace_content_section(page):
+    """replace the content section with /content/ pages"""
+    content = open(page['filename']).read()
+    doc_page = open(page['output']).read()
+    #replacing and writing the doc pages with content
+    full_page = doc_page.replace("{content}", content)
+    open(page['output'], 'w+').write(full_page)
+    return print('Completed: ',page['output'])
+
+def main():
     for page in pages:
-        print(page['filename'])
-        full_page = template.safe_substitute(page)
-        open(page['output'], 'w+').write(full_page)
+        replace_template_strings(page)
+        replace_content_section(page)
 
-        #replace the content section with /content/ pages
-        content = open(page['filename']).read()
-        full_page = full_page.replace("{content}", content)
-        open(page['output'], 'w+').write(full_page)
-        print('Completed: ',page['output'])
-
-replace_template_values()
+if __name__ == "__main__":
+    main()
