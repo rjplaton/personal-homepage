@@ -1,11 +1,3 @@
-/*Google Fonts*/
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Rubik', sans-serif;
-}
-body {
-	font-family: 'Roboto', sans-serif;
-}
-/* End of Google Fonts*/
 .col-sm-3 > label-150 {
     font-size: 150%;
 }
