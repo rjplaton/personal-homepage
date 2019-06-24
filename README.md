@@ -1,5 +1,5 @@
 # Personal Homepage Project
-[![rjplaton](http://rjplaton.com/img/core-img/logo.png)](http://rjplaton.com)
+# [![rjplaton](http://rjplaton.com/img/core-img/logo.png)](http://rjplaton.com)
 Powering my personal site at [rjplaton.com](http://rjplaton.com) featuring my profile, projects & blog. It's a playgound for building and iterating on a concepts and things I've learned in programming.
 
 
