@@ -1,5 +1,7 @@
 # Personal Homepage Project
-Building and iterating on a personal site where I can test concepts and things I've learned in programming.
+# [![rjplaton](http://rjplaton.com/img/core-img/logo.png)](http://rjplaton.com)
+A site featuring my profile, projects & blog. It a playgound for building and iterating on a concepts and things I've learned in programming.
+
 
 ### Current tech stack:
 - HTML
