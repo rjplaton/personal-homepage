@@ -132,5 +132,12 @@ h2.about-me {
     background-color: red;
 }
 
+div.post-details-text {
+    border-color: #343a40;
+    border-style: solid;
+    border-width: thin;
+    padding: 20px;
+    margin: -5px;
+}
 
 
