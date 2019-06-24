@@ -1,11 +1,3 @@
-/*Google Fonts*/
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Rubik', sans-serif;
-}
-body {
-	font-family: 'Roboto', sans-serif;
-}
-/* End of Google Fonts*/
 .col-sm-3 > label-150 {
     font-size: 150%;
 }
@@ -140,5 +132,12 @@ h2.about-me {
     background-color: red;
 }
 
+div.post-details-text {
+    border-color: #343a40;
+    border-style: solid;
+    border-width: thin;
+    padding: 20px;
+    margin: -5px;
+}
 
 
