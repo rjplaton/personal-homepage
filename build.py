@@ -5,6 +5,7 @@ pages = [ {
         "title": "Personal Projects & More",
         "meta_description": "Welcome to Reuben's personal project site",
         "index_class": 'class="current-item"',
+        "name_only": 'index',
 }, 
 {
         "filename": "content/blog.html",
@@ -12,6 +13,7 @@ pages = [ {
         "title": "Blog",
         "meta_description": "Blogging about stuff",
         "blog_class": 'class="current-item"',
+        "name_only": 'blog',
 }, 
 {
         "filename": "content/contact.html",
@@ -19,6 +21,7 @@ pages = [ {
         "title": "Contact Me",
         "meta_description": "Contact me through the contact form on this page",
         "contact_class": 'class="current-item"',
+        "name_only": 'contact',
 },
 {
         "filename": "content/projects.html",
@@ -26,17 +29,15 @@ pages = [ {
         "title": "Projects & More",
         "meta_description": "Current & Past Coding Projects",
         "projects_class": 'class="current-item"',
+        "name_only": 'projects',
 },
 ]
 
 #creating a function to auto generate pages it finds in the /content/ directory
 import glob
 all_content_files = glob.glob("content/*.html")
-print(all_content_files)
 import os
 from jinja2 import Template
-
-test_pages = []
 
 for content in all_content_files:
     file_path = content
@@ -45,18 +46,12 @@ for content in all_content_files:
     print(file_name)
     name_only, extension = os.path.splitext(file_name)
     #will print blog
-    print(name_only)
-
-#CURRENTLY SET TO THE /test/ FOLDER - UPDATE LATER    
-    output = "test/" + file_name
+    print(name_only) 
+    output = "docs/" + file_name
     nav_class = name_only + "_class"
-    full_nav_class = nav_class + '="current-item"'
     generic_meta_desc = name_only.capitalize() + " page on Reuben Platon's personal website"
-   
-    #####  CURRENTLY SET TO TEST PAGES LIST - UPDATE LATER   #####
-
     #add the information for each new file in the pages list    
-    test_pages.append({
+    pages.append({
     #set to find html files in /content/    
     "filename": content,
     "title": name_only,
@@ -64,59 +59,55 @@ for content in all_content_files:
     "output": output,
     "meta_description": generic_meta_desc,
     #set nav_class used for setting active class
-    nav_class: full_nav_class
+    nav_class: 'class="current-item"',
+    'name_only': name_only,
 })
-
-print(test_pages)
-
-
-
 
 ### REFACTORING TO USE JINJA2  START ###
 
 
 
-def replace_template_strings(page):
-    """replace strings in template and outputs to /docs/file"""
-    #using Template strings and safesubstitute to replace values
-    #moved the import into this function as it is only used by this function
-    from string import Template
-    template_text = open('./templates/template.html').read()
-    template = Template(template_text)
-    print('Updating:', page['filename'])
-    updated_page = template.safe_substitute(page)
-    #writing the updates to the/doc/pages
-    open(page['output'], 'w+').write(updated_page)
+# def replace_template_strings(page):
+#     """replace strings in template and outputs to /docs/file"""
+#     #using Template strings and safesubstitute to replace values
+#     #moved the import into this function as it is only used by this function
+#     from string import Template
+#     template_text = open('./templates/template.html').read()
+#     template = Template(template_text)
+#     print('Updating:', page['filename'])
+#     updated_page = template.safe_substitute(page)
+#     #writing the updates to the/doc/pages
+#     open(page['output'], 'w+').write(updated_page)
 
-def replace_content_section(page):
-    """for each /docs/file, replace the 'content' section with /content/ pages"""
-    content = open(page['filename']).read()
-    doc_page = open(page['output']).read()
-    #replacing and writing the doc pages with content
-    full_page = doc_page.replace("{content}", content)
-    open(page['output'], 'w+').write(full_page)
-    return print('Completed: ',page['output'])
+# def replace_content_section(page):
+#     """for each /docs/file, replace the 'content' section with /content/ pages"""
+#     content = open(page['filename']).read()
+#     doc_page = open(page['output']).read()
+#     #replacing and writing the doc pages with content
+#     full_page = doc_page.replace("{content}", content)
+#     open(page['output'], 'w+').write(full_page)
+#     return print('Completed: ',page['output'])
 
 
 
 
 from jinja2 import Template
-for test_page in test_pages:
-    content_page = open(test_page['filename']).read()
+for page in pages:
+    content_page = open(page['filename']).read()
     template_html = open("./templates/base.html").read()
     template = Template(template_html)
-    nav_class = test_page['title'] + '_class'
+    #defining nav_class as it is dynamically generated per page
+    nav_class = page['name_only'] + '_class'
+    #using dict argument to include the nav_class variable
     output = template.render(
          {
-         'title': test_page['title'],
+         'title': page['title'],
          'content': content_page,
-         'meta_description': test_page['meta_description'],
-         #### 
-         nav_class: test_page[nav_class],
+         'meta_description': page['meta_description'],
+         nav_class: page[nav_class],
          }
          )
-    print('opening the file to write')
-    open(test_page['output'], 'w+').write(output)
+    open(page['output'], 'w+').write(output)
 
 
 
