@@ -34,6 +34,9 @@ import glob
 all_content_files = glob.glob("content/*.html")
 print(all_content_files)
 import os
+from jinja2 import Template
+
+test_pages = []
 
 for content in all_content_files:
     file_path = content
@@ -47,9 +50,13 @@ for content in all_content_files:
 #CURRENTLY SET TO THE /test/ FOLDER - UPDATE LATER    
     output = "test/" + file_name
     nav_class = name_only + "_class"
-    generic_meta_desc = "The",name_only,"page on Reuben Platon's personal website"
+    full_nav_class = nav_class + '="current-item"'
+    generic_meta_desc = name_only.capitalize() + " page on Reuben Platon's personal website"
+   
+    #####  CURRENTLY SET TO TEST PAGES LIST - UPDATE LATER   #####
+
     #add the information for each new file in the pages list    
-    pages.append({
+    test_pages.append({
     #set to find html files in /content/    
     "filename": content,
     "title": name_only,
@@ -57,13 +64,20 @@ for content in all_content_files:
     "output": output,
     "meta_description": generic_meta_desc,
     #set nav_class used for setting active class
-    nav_class: 'class="current-item"'
+    nav_class: full_nav_class
 })
 
-print(pages)
+print(test_pages)
+
+
+
+
+### REFACTORING TO USE JINJA2  START ###
+
+
 
 def replace_template_strings(page):
-    """replace strings in template"""
+    """replace strings in template and outputs to /docs/file"""
     #using Template strings and safesubstitute to replace values
     #moved the import into this function as it is only used by this function
     from string import Template
@@ -75,13 +89,41 @@ def replace_template_strings(page):
     open(page['output'], 'w+').write(updated_page)
 
 def replace_content_section(page):
-    """replace the content section with /content/ pages"""
+    """for each /docs/file, replace the 'content' section with /content/ pages"""
     content = open(page['filename']).read()
     doc_page = open(page['output']).read()
     #replacing and writing the doc pages with content
     full_page = doc_page.replace("{content}", content)
     open(page['output'], 'w+').write(full_page)
     return print('Completed: ',page['output'])
+
+
+
+
+from jinja2 import Template
+for test_page in test_pages:
+    content_page = open(test_page['filename']).read()
+    template_html = open("./templates/base.html").read()
+    template = Template(template_html)
+    nav_class = test_page['title'] + '_class'
+    output = template.render(
+         {
+         'title': test_page['title'],
+         'content': content_page,
+         'meta_description': test_page['meta_description'],
+         #### 
+         nav_class: test_page[nav_class],
+         }
+         )
+    print('opening the file to write')
+    open(test_page['output'], 'w+').write(output)
+
+
+
+
+
+### REFACTORING TO USE JINJA2  END ###
+
 
 
 #list every blog post
@@ -122,22 +164,22 @@ def replace_blog_content(blog_post):
     return print('Completed: ',blog_post['output'])
 
 
-def main():
-    i = 0
-    for page in pages:
-        replace_template_strings(page)
-        replace_content_section(page)
-        i += 1
-    #using i to count how many times the function looped 
-    #and comparing with total number of list items
-    print('- - - -',i,"out of", len(pages), "html pages in /doc/ updated. - - - -")
-    i = 0
-    for blog_post in blog_posts:
-        replace_blog_strings(blog_post)
-        replace_blog_content(blog_post)
-        i +=1
-    return print('- - - -',i,"out of", len(blog_posts), "blogs in /doc/ updated. - - - -")
+# def main():
+#     i = 0
+#     for page in pages:
+#         replace_template_strings(page)
+#         replace_content_section(page)
+#         i += 1
+#     #using i to count how many times the function looped 
+#     #and comparing with total number of list items
+#     print('- - - -',i,"out of", len(pages), "html pages in /doc/ updated. - - - -")
+#     i = 0
+#     for blog_post in blog_posts:
+#         replace_blog_strings(blog_post)
+#         replace_blog_content(blog_post)
+#         i +=1
+#     return print('- - - -',i,"out of", len(blog_posts), "blogs in /doc/ updated. - - - -")
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
