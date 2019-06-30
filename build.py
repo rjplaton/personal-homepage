@@ -29,6 +29,35 @@ pages = [ {
 },
 ]
 
+#creating a function to auto generate pages it finds in the /content/ directory
+import glob
+# all_html_files = glob.glob("content/*.html")
+# for page in all_html_files:
+#     print(page)
+
+import os
+file_path = "content/blog.html"
+file_name = os.path.basename(file_path)
+#will print blog.html
+print(file_name)
+name_only, extension = os.path.splitext(file_name)
+#will print blog
+print(name_only)
+
+
+test_pages_list = []
+test_pages_list.append({
+#set to find html files in /content/    
+"filename": "content/index.html",
+#set to 
+"title": "Index",
+#set to corresponding /docs/ output html
+"output": "docs/index.html",
+})
+print(test_pages_list)
+
+
+
 def replace_template_strings(page):
     """replace strings in template"""
     #using Template strings and safesubstitute to replace values
@@ -106,5 +135,5 @@ def main():
     return print('- - - -',i,"out of", len(blog_posts), "blogs in /doc/ updated. - - - -")
 
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+    #main()
