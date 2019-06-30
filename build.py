@@ -1,37 +1,5 @@
-#list of key pages and the strings to replace
-pages = [ {
-        "filename": "content/index.html",
-        "output": "docs/index.html",
-        "title": "Personal Projects & More",
-        "meta_description": "Welcome to Reuben's personal project site",
-        "index_class": 'class="current-item"',
-        "name_only": 'index',
-}, 
-{
-        "filename": "content/blog.html",
-        "output": "docs/blog.html",
-        "title": "Blog",
-        "meta_description": "Blogging about stuff",
-        "blog_class": 'class="current-item"',
-        "name_only": 'blog',
-}, 
-{
-        "filename": "content/contact.html",
-        "output": "docs/contact.html",
-        "title": "Contact Me",
-        "meta_description": "Contact me through the contact form on this page",
-        "contact_class": 'class="current-item"',
-        "name_only": 'contact',
-},
-{
-        "filename": "content/projects.html",
-        "output": "docs/projects.html",
-        "title": "Projects & More",
-        "meta_description": "Current & Past Coding Projects",
-        "projects_class": 'class="current-item"',
-        "name_only": 'projects',
-},
-]
+#list of pages and the strings to replace, empty and will be filled by the auto_disocver_content_files function
+pages = []
 
 #auto generate pages it finds in the /content/ directory
 def auto_discover_content_files():
@@ -48,7 +16,6 @@ def auto_discover_content_files():
         name_only, extension = os.path.splitext(file_name)
         #will print blog
         output = "docs/" + file_name
-        nav_class = name_only + "_class"
         generic_meta_desc = name_only.capitalize() + " page on Reuben Platon's personal website"
         #add the information for each new file in the pages list    
         pages.append({
@@ -58,40 +25,48 @@ def auto_discover_content_files():
         #set to corresponding /docs/ output html
         "output": output,
         "meta_description": generic_meta_desc,
-        #set nav_class used for setting active class
-        nav_class: 'class="current-item"',
         'name_only': name_only,
         })
         i += 1
         #using i to count how many times the function looped 
         #and comparing with total number of list items
-        print('- - - -',i,"out of", len(all_content_files), "html files in /content/ processed. - - - -")
+        print('- - - -',i,"out of", len(all_content_files), "files in /content/ processed. - - - -")
 
 ### USING JINJA2 Templating ###
+
+
 
 def update_doc_htmls():
     """update all pages in the pages list to update template strings and write updated files to /docs/"""
     from jinja2 import Template
+    i = 0
     for page in pages:
         content_page = open(page['filename']).read()
         template_html = open("./templates/base.html").read()
         template = Template(template_html)
-        #defining nav_class as it is dynamically generated per page
-        nav_class = page['name_only'] + '_class'
-        #using dict argument to include the nav_class variable
+        #using positional arugment
         output = template.render(
-             {
-             'title': page['title'],
-             'content': content_page,
-             'meta_description': page['meta_description'],
-             nav_class: page[nav_class],
-             }
-             )
+            pages=pages,
+            title=page['title'],
+            content=content_page,
+            meta_description=page['meta_description'],
+            )
+        
+        #using dict argument to include the nav_class variable
+        # output = template.render(
+        #      {
+        #      'title': page['title'],
+        #      'content': content_page,
+        #      'meta_description': page['meta_description'],
+        #      nav_class: page[nav_class],
+        #      }
+        #      )
         open(page['output'], 'w+').write(output)
+        i += 1
+        print('- - - -',i,"out of", len(pages), "html files in /docs/ processed. - - - -")
 
 
 #list every blog post
-
 blog_posts = [ {
         "filename": "content/blog/1.html",
         "date": "03 June 2019",
@@ -112,6 +87,7 @@ blog_posts = [ {
 },
 ]
 
+ #blog files still using older functions, will update
 def replace_blog_strings(blog_post):
     from string import Template
     template_text = open('./templates/blog_base.html').read()
@@ -131,6 +107,7 @@ def replace_blog_content(blog_post):
 def main():
     auto_discover_content_files()
     update_doc_htmls()
+    #blog files still using older functions, will update
     i = 0
     for blog_post in blog_posts:
         replace_blog_strings(blog_post)
