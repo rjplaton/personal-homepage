@@ -104,17 +104,37 @@ def replace_blog_content(blog_post):
     return print('Completed: ',blog_post['output'])
 
 
-def main():
-    auto_discover_content_files()
-    update_doc_htmls()
-    #blog files still using older functions, will update
-    i = 0
-    for blog_post in blog_posts:
-        replace_blog_strings(blog_post)
-        replace_blog_content(blog_post)
-        i +=1
-    return print('- - - -',i,"out of", len(blog_posts), "blogs in /doc/ updated. - - - -")
+def new_file_creation():
+    print("New page was specified")
+    new_page_title = input('What should the title of the new page be?   ')
+    ### for new page content, consider extending the base template using the Contact page as a template
+    open('content/' + new_page_title + '.html', 'w+').write("""
+  <div class="breadcumb-area">
+    <div class="container h-100">
+      <div class="row h-100 align-items-end">
+        <div class="col-12">
+          <div class="breadcumb--con">
+            <h2 class="title">""" + str(new_page_title) + """</h2>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">""" + str(new_page_title) + """</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        """)
 
 
-if __name__ == "__main__":
-    main()
+
+
+
+
+
+
+
+
+
