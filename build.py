@@ -31,32 +31,36 @@ pages = [ {
 
 #creating a function to auto generate pages it finds in the /content/ directory
 import glob
-# all_html_files = glob.glob("content/*.html")
-# for page in all_html_files:
-#     print(page)
-
+all_content_files = glob.glob("content/*.html")
+print(all_content_files)
 import os
-file_path = "content/blog.html"
-file_name = os.path.basename(file_path)
-#will print blog.html
-print(file_name)
-name_only, extension = os.path.splitext(file_name)
-#will print blog
-print(name_only)
 
+for content in all_content_files:
+    file_path = content
+    file_name = os.path.basename(file_path)
+    #will print blog.html
+    print(file_name)
+    name_only, extension = os.path.splitext(file_name)
+    #will print blog
+    print(name_only)
 
-test_pages_list = []
-test_pages_list.append({
-#set to find html files in /content/    
-"filename": "content/index.html",
-#set to 
-"title": "Index",
-#set to corresponding /docs/ output html
-"output": "docs/index.html",
+#CURRENTLY SET TO THE /test/ FOLDER - UPDATE LATER    
+    output = "test/" + file_name
+    nav_class = name_only + "_class"
+    generic_meta_desc = "The",name_only,"page on Reuben Platon's personal website"
+    #add the information for each new file in the pages list    
+    pages.append({
+    #set to find html files in /content/    
+    "filename": content,
+    "title": name_only,
+    #set to corresponding /docs/ output html
+    "output": output,
+    "meta_description": generic_meta_desc,
+    #set nav_class used for setting active class
+    nav_class: 'class="current-item"'
 })
-print(test_pages_list)
 
-
+print(pages)
 
 def replace_template_strings(page):
     """replace strings in template"""
@@ -135,5 +139,5 @@ def main():
     return print('- - - -',i,"out of", len(blog_posts), "blogs in /doc/ updated. - - - -")
 
 
-#if __name__ == "__main__":
-    #main()
+if __name__ == "__main__":
+    main()
