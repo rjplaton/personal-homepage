@@ -8,14 +8,16 @@ Powering my personal site at [rjplaton.com](http://rjplaton.com) featuring my pr
 - CSS
 - Bootstrap
 - Python
+- Jinja2
 
 Python is being used to automate the generation of the site by combining content pages with a template.
 
 ### Instructions on updating the website:
 1. To update body content of specific pages, update the pages in /content/: 
-2. To update page specific values like `title` &  `meta-description`, update the `pages` dict contained in `build.py`
-3. To update the common header and footer, update template.html in /templates/
-4. Run build.py to automtically apply changes to all user facing "full pages" in /docs/
+2. To update the common header and footer, update base.html in /templates/
+3. Run `manage.py build` to automtically apply changes to all user facing "full pages" in /docs/
+4. You can also create new pages with `manage.py new`. This will ask you for a page title and create a file within /content/ that will be built and rendered as a full page in /docs/
+
 ```sh
-$ python3 build.py
+$ python3 manage.py build
 ```

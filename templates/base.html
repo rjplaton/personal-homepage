@@ -14,12 +14,12 @@
 <!-- End Global site tag (gtag.js) - Google Analytics -->
 
   <meta charset="UTF-8">
-  <meta name="description" content="$meta_description">
+  <meta name="description" content="{{ meta_description }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>${title} | Reuben J. Platon</title>
+  <title>{{ title|title }} | Reuben J. Platon</title>
 
   <!-- Favicon -->
   <link rel="icon" href="./img/core-img/favicon.ico">
@@ -66,13 +66,16 @@
             <!-- Nav Start -->
             <div class="classynav">
               <ul id="nav">
-                <li ${index_class}><a href="./index.html">Home</a></li>
-                <li ${projects_class}><a href="./projects.html">Projects</a></li>
-                <li ${blog_class}><a href="./blog.html">Blog</a></li>
-                <li ${contact_class}><a href="./contact.html">Contact</a></li>
+                {% set active_page = title %}
+                        {% for page in pages %}
+                        <li {% if page.title == active_page %} class="current-item" {% endif %}><a href="./{{ page.name_only }}.html">{{ page.title|title }}</a></li>
+                        {% endfor %}      
               </ul>
             </div>
             <!-- Nav End -->
+
+
+
 
           </div>
         </nav>
@@ -81,7 +84,7 @@
   </header>
   <!-- ***** Header Area End ***** -->
 
-{content}
+{{ content }}
 
 <!-- ***** Footer Area Start ***** -->
   <footer class="footer-area section-padding-80-0">
