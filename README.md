@@ -1,25 +1,36 @@
-# Personal Homepage Project
-# [![rjplaton](http://rjplaton.com/img/core-img/logo.png)](http://rjplaton.com)
-Powering my personal site at [rjplaton.com](http://rjplaton.com) featuring my profile, projects & blog. It's a playgound for building and iterating on a concepts and things I've learned in programming.
+# rjplaton.com
 
+Source for my personal homepage at [rjplaton.com](https://rjplaton.com).
 
-### Current tech stack:
-- HTML
-- CSS
-- Bootstrap
-- Python
-- Jinja2
+Static one-page site, served directly by GitHub Pages from `/docs`.
 
-Python is being used to automate the generation of the site by combining content pages with a template.
+## Editing
 
-### Instructions on updating the website:
-1. To update body content of specific pages, update the pages in /content/: 
-2. To update the common header and footer, update base.html in /templates/
-3. `pipenv shell`
-4. Ensure Jinja2 is installed `pip install Jinja2`
-5. Run `manage.py build` to automtically apply changes to all user facing "full pages" in /docs/
-6. You can also create new pages with `manage.py new`. This will ask you for a page title and create a file within /content/ that will be built and rendered as a full page in /docs/
+Edit `docs/index.html` (and `docs/style.css` if needed), commit, push. That's it — GitHub Pages picks it up within a minute or two.
 
 ```sh
-$ python3 manage.py build
+git add docs/
+git commit -m "your message"
+git push
 ```
+
+## Layout
+
+```
+docs/
+  index.html    — the page
+  style.css     — styles (system fonts, dark mode via prefers-color-scheme)
+  404.html      — custom not-found
+  portrait.jpg  — photo
+  favicon.ico
+  robots.txt
+  sitemap.xml
+  CNAME         — custom domain (rjplaton.com)
+```
+
+## Hosting & DNS
+
+- **Host**: GitHub Pages, source = `master` branch / `/docs` folder
+- **Registrar**: Porkbun
+- **DNS**: Cloudflare (apex A → GitHub Pages IPs, www CNAME → rjplaton.github.io, AAAA, MX for Cloudflare Email Routing, DMARC, CAA)
+- **Analytics**: Cloudflare Web Analytics (snippet in `index.html`, currently commented out — uncomment after pasting the token)
