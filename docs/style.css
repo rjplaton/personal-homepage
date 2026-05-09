@@ -101,6 +101,27 @@ h1 {
   color: var(--muted);
 }
 
+.aside {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.aside a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.aside a:hover,
+.aside a:focus-visible {
+  color: var(--link-hover);
+  border-color: currentColor;
+  outline: none;
+}
+
 @media (max-width: 480px) {
   .portrait {
     width: 96px;
